@@ -3,15 +3,16 @@ import PySimpleGUI as sg
 import time
 
 sg.theme('Black')
+
 clock = sg.Text('', key= 'clock')
 label = sg.Text("Type in a to-do :")
 input_box = sg.InputText(tooltip="Enter Box", key='todo')
-add_button = sg.Button('Add')
+add_button = sg.Button (size=7, image_source='add.png', tooltip='Add To-do',key= 'Add')
 
 list_box = sg.Listbox(values = functions.get_todos(), key='todos',
-                      enable_events=True, size=[45,10])
+                      enable_events=True, size=[45, 10])
 edit_button = sg.Button('Edit')
-complete_button = sg.Button('Complete')
+complete_button = sg.Button(size=7, image_source='complete.png', tooltip='Complete', key='Complete')
 exit_button = sg.Button('Exit')
 
 
@@ -43,7 +44,7 @@ while True:
                 todo_to_edit = values['todos'][0]
                 new_todo = values['todo']
 
-                todos=functions.get_todos()
+                todos = functions.get_todos()
 
                 index= todos.index(todo_to_edit)
                 todos[index] = new_todo
@@ -51,7 +52,7 @@ while True:
                 functions.write_todos(todos)
                 window['todos'].update(values=todos)
             except IndexError:
-                sg.popup('Please select an item',font=30)
+                sg.popup('Please select an item', font=30)
 
         case 'Complete':
             try:
